@@ -2,6 +2,7 @@ import React, { Component } from "react"
 import worldGen from "./worldGen"
 import worldGrid from "./WorldGrid";
 import bottomBar from "./bottomBar";
+import {events, SingularEventCode } from "./events";
 
 
 class GameScreen extends Component {
@@ -23,7 +24,9 @@ class GameScreen extends Component {
             commerceIncome: 0,
             productionIncome: 0,
             endGame: null,
-            cityCount: 0
+            cityCount: 0,
+            endGameTurns: 60,
+            eventsOrder: events()
         }
 
         this.defeat = () => {
@@ -35,7 +38,7 @@ class GameScreen extends Component {
         }
         this.endGame = () => {
 
-            let victoryCondition = this.state.production - this.state.turn >= 0;
+            let victoryCondition = this.state.production - 100 >= 0;
             //victory
 
             if(victoryCondition) {
@@ -58,7 +61,7 @@ class GameScreen extends Component {
         }
         this.nextTurn = () => {
 
-            if(this.state.turn>=100) {
+            if(this.state.turn>=this.state.endGameTurns) {
                 return this.endGame();
             }
 
@@ -203,7 +206,9 @@ class GameScreen extends Component {
                     settle: this.settle,
                     nextTurn: this.nextTurn, 
                     endGame: this.state.endGame,
-                    cityCount: this.state.cityCount})}
+                    cityCount: this.state.cityCount,
+                    endGameTurns: this.state.endGameTurns
+                    })}
                 
             </>
         );
