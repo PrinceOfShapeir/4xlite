@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component } from "react";
 import AppSplash from './appSplash';
 import GameScreen from './components/GameScreen';
-
+import background from './shepherd_with_his_flock_2004.166.3.jpg';
 
 class App extends Component {
 
@@ -21,7 +21,7 @@ class App extends Component {
 
   render() {
     return (
-      <>
+      <div style={this.state.splashVisible ? {backgroundImage: `url(${background})`, height: '100vh'} : {}}>
         {this.state.splashVisible && (<AppSplash toggleSplash={this.toggleSplash} />)}
         {!this.state.splashVisible && <GameScreen />}
         <div className="App">     
@@ -41,7 +41,11 @@ class App extends Component {
               
               }
         </div>
-      </>
+
+        {this.state.splashVisible && (
+          <p style={{position: 'absolute', right: '0', bottom: '0'}}>Jean-Victor Bertin - Shepherd with His Flock, c. 1820. All works in public domain.</p>
+        )}
+      </div>
 
 
     );
