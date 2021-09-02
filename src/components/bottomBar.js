@@ -123,10 +123,14 @@ function bottomBar (props) {
 
                             {props.eventOutcome && (
                                 <div>
+                                    <p><b>{SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Title`]}</b></p>
                                     <p>
                                     {SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Text`]}
                                     </p>
-                                    <p><button type="button" onClick={props.killEvent}>Well, alright then.</button></p>
+                                    <p><button type="button" onClick={props.killEvent}>{
+                                    SingularEventCode[props.currentEvent][`endEventText${props.whichEventNumber}`]
+                                    }
+                                    </button></p>
                                 </div>
 
                             )}
