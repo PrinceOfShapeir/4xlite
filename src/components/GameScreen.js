@@ -116,7 +116,7 @@ class GameScreen extends Component {
                 return this.endGame();
             }
 
-            if(this.state.eventsOrder.length>0) {
+            if(this.state.eventsOrder.length>0&&!this.state.currentEvent) {
 
                 if(Math.random()<=0.20) {
 

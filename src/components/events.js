@@ -1,5 +1,48 @@
 export const  SingularEventCode = {
 
+
+         tribalVillageFound: {
+
+        
+            text: "Scouts report an abandoned tribal village not far from here. Do you investigate? ",
+
+            option1Text: "Ignore",
+            option2Text: "Explore",
+
+            outcome1Title: "Can't Be Bothered",
+            outcome2Title: "Research Found!", 
+
+            outcome1Text:"We have better things to do.",
+
+            outcome2Text:"Stumbling through the abandoned huts, your scouts make a momentous find. You have discovered the Manhattan Project!",
+
+            outcome1Payoffs: {
+                food: 0,
+                production: 10,
+                commerce: 0,
+                fpy: 0,
+                ppy: 0,
+                cpy: 0
+            },
+
+            outcome2Payoffs: {
+
+                food: 0,
+                production: -5,
+                commerce: 0,
+                fpy: 0,
+                ppy: 0,
+                cpy: 0
+            },
+
+            endEventText1: "By focusing, we will gain a bonus to our productivity!",
+            endEventText2: "What is this I don't even"
+
+        
+        },
+
+
+
         strangerInAStrangeLand: {
 
         
@@ -27,7 +70,7 @@ export const  SingularEventCode = {
             outcome2Payoffs: {
 
                 food: -5,
-                production: -10,
+                production: -5,
                 commerce: 10,
                 fpy: 0,
                 ppy: 0,
@@ -75,7 +118,7 @@ export const  SingularEventCode = {
             },
 
             endEventText1: "A sign of our divine right to rule!",
-            endEventText2: "No, no. Dig up stupid!"
+            endEventText2: "No, no. Dig up, stupid!"
         
         }
     }
