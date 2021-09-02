@@ -16,24 +16,23 @@ export const  SingularEventCode = {
             outcome1Payoffs: {
                 food: 0,
                 production: 0,
-                commerce: 10
+                commerce: 10,
+                fpy: 0,
+                ppy: 0,
+                cpy: 0
             },
 
             outcome2Payoffs: {
 
                 food: 10,
                 production: 0,
-                commerce: 0
-
-            }
-
-        
+                commerce: 0,
+                fpy: 0,
+                ppy: 0,
+                cpy: 0
+            }        
         
         }
-
-
-
-
     }
 
 

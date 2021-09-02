@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import worldGen from "./worldGen"
 import worldGrid from "./WorldGrid";
 import bottomBar from "./bottomBar";
-import {events, SingularEventCode } from "./events";
+import {events} from "./events";
 
 
 class GameScreen extends Component {
@@ -26,7 +26,58 @@ class GameScreen extends Component {
             endGame: null,
             cityCount: 0,
             endGameTurns: 60,
-            eventsOrder: events()
+            eventsOrder: events(),
+            currentEvent: null,
+            eventOutcome: false,
+            whichEventNumber: null
+        }
+
+        this.killEvent = () => {
+
+            if(this.state.currentEvent) {
+                this.setState({
+                    currentEvent: null,
+                    eventOutcome: false,
+                    whichEventNumber: null
+                })
+            }
+
+
+        }
+
+
+        this.tallyEventOutcome = (payoffs, whichEventNumber) => {
+
+            console.log(`Should be firing event outcome ${whichEventNumber}`);
+
+            return this.setState({
+                food: this.state.food + payoffs.food,
+                production: this.state.production + payoffs.production,
+                commerce: this.state.commerce + payoffs.commerce,
+                eventOutcome: true,
+                whichEventNumber: whichEventNumber
+            });
+
+
+        }
+
+        this.fireEvent = () => {
+
+            //check for eventOrder.length before activating this function
+
+            //console.log("event should have fired...");
+            
+
+            let events = [...this.state.eventsOrder];
+
+            let currentEvent = events.pop();
+
+            console.log(currentEvent);
+
+            return this.setState({
+                currentEvent: currentEvent,
+                eventsOrder: events
+            });
         }
 
         this.defeat = () => {
@@ -63,6 +114,18 @@ class GameScreen extends Component {
 
             if(this.state.turn>=this.state.endGameTurns) {
                 return this.endGame();
+            }
+
+            if(this.state.eventsOrder.length>0) {
+
+                if(Math.random()<=0.20) {
+
+                    this.fireEvent();
+
+                }
+
+
+
             }
 
 
@@ -207,7 +270,12 @@ class GameScreen extends Component {
                     nextTurn: this.nextTurn, 
                     endGame: this.state.endGame,
                     cityCount: this.state.cityCount,
-                    endGameTurns: this.state.endGameTurns
+                    endGameTurns: this.state.endGameTurns,
+                    currentEvent: this.state.currentEvent,
+                    killEvent: this.killEvent,
+                    eventOutcome: this.state.eventOutcome,
+                    tallyEventOutcome: this.tallyEventOutcome,
+                    whichEventNumber: this.state.whichEventNumber
                     })}
                 
             </>

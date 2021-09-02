@@ -3,6 +3,7 @@ import trees from "../tileset/trees.svg";
 import grass from "../tileset/grass.svg";
 import water from "../tileset/water.svg";
 import hills from "../tileset/hills.svg";
+import {SingularEventCode} from "./events";
 
 
 function settlePrompt (settlers) {
@@ -104,6 +105,41 @@ function bottomBar (props) {
                     As some of the villagers make to stitch together rafts and flee, you begin an impassioned plea not to abandon all that you have accomplished thus far. 
                     You have until then to rally the four tribes, to construct great works to hold back the waters, or else the land will descend once more into barbarism.</p>
                 
+                )}
+                &nbsp;
+                {props.turn!==10 && (
+                    <>
+                        {props.currentEvent ? 
+                        
+                        //Event message
+                        
+                        (
+                            <> {!props.eventOutcome && (
+
+                                <p>{SingularEventCode[props.currentEvent].text} <br />
+                                    <button type="button" onClick={()=>props.tallyEventOutcome(SingularEventCode[props.currentEvent].outcome1Payoffs, 1)}>{SingularEventCode[props.currentEvent].option1Text}</button>&nbsp;&nbsp;<button type="button"  onClick={()=>props.tallyEventOutcome(SingularEventCode[props.currentEvent].outcome2Payoffs, 2)}>{SingularEventCode[props.currentEvent].option2Text}</button>
+                                </p>
+                            )}
+
+                            {props.eventOutcome && (
+                                <div>
+                                    <p>
+                                    {SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Text`]}
+                                    </p>
+                                    <p><button type="button" onClick={props.killEvent}>Well, alright then.</button></p>
+                                </div>
+
+                            )}
+                                
+                                
+                            
+                            </>
+                        ) : (
+                        <p>There are no current events.
+                        </p>
+                        
+                        )}
+                    </>
                 )}
                 &nbsp;
                 {(props.settlers>0) && settlePrompt(props.settlers)}
