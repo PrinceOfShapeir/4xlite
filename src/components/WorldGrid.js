@@ -98,10 +98,10 @@ function GridCols (grid, selectTerrain) {
 function Grid (grid, selectTerrain) {
     return (
         <>
-            <table cellpadding="0" cellspacing="0" border="0" style={{borderCollapse: "collapse"}}>
+            <table cellPadding="0" cellSpacing="0" border="0" style={{borderCollapse: "collapse"}}>
                 <thead>
                     <tr>
-                        <th colspan="2">World Map</th>
+                        <th colSpan="2">World Map</th>
                     </tr>
                 </thead>
                 <tbody>

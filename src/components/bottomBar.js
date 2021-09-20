@@ -3,7 +3,12 @@ import trees from "../tileset/trees.svg";
 import grass from "../tileset/grass.svg";
 import water from "../tileset/water.svg";
 import hills from "../tileset/hills.svg";
+import treesCity from "../tileset/treesCity.svg"
+import hillsCity from "../tileset/hillsCity.svg"
+import grassCity from "../tileset/grassCity.svg"
+import "./navBar.css";
 import {SingularEventCode} from "./events";
+
 
 
 function settlePrompt (settlers) {
@@ -25,7 +30,7 @@ function terrainInfo (terrain, x, y, settle, settled, selectedIsSettled, turn, n
                             return(
 
                                 <>
-                                    <img src={grass} alt="grass" />
+                                    <img src={selectedIsSettled ? grassCity : grass} alt="grass" />
                                     &nbsp;
                                     <p>You have {selectedIsSettled ? "settled" : "chosen"} grassland, which produces two food.</p>
                                     
@@ -36,7 +41,7 @@ function terrainInfo (terrain, x, y, settle, settled, selectedIsSettled, turn, n
                             return(
 
                                 <>
-                                    <img src={hills} alt="hills" />
+                                    <img src={selectedIsSettled ? hillsCity : hills} alt="hills" />
                                     &nbsp;
                                     <p>You have {selectedIsSettled ? "settled" : "chosen"} hills, which produces two production, and has a defensive bonus.</p>
                                 </>
@@ -46,7 +51,7 @@ function terrainInfo (terrain, x, y, settle, settled, selectedIsSettled, turn, n
                             return(
 
                                 <>
-                                    <img src={trees} alt="trees" />
+                                    <img src={selectedIsSettled ? treesCity : trees} alt="trees" />
                                     &nbsp;
                                     <p>You have {selectedIsSettled ? "settled" : "chosen"} forest, which produces one food and one production.</p>
                                 </>
@@ -91,80 +96,94 @@ function terrainInfo (terrain, x, y, settle, settled, selectedIsSettled, turn, n
 
 
 }
+const bottomCSS = {
+
+    fontFamily: "URW Chancery L, Brush Script MT, cursive",
+    backgroundColor: "rgb(237,237,95)",
+    borderColor: "rgb(254,255,0)",
+    borderStyle: "double",
+    borderWidth: "0.5em",
+    borderImageSlice: 1,
+
+}
 
 function bottomBar (props) {
 
     if (!props.endGame) {
 
         return (
-            <Navbar bg="light" expand="md" fixed="bottom">
-                {(props.turn===10) && ( 
-                
-                    <p>A village elder comes to you in the dead of night, recounting a vision of doom. 
-                    Within {props.endGameTurns} moons, they say, a great flood will inundate the land, erasing any and all trace of a once proud people.
-                    As some of the villagers make to stitch together rafts and flee, you begin an impassioned plea not to abandon all that you have accomplished thus far. 
-                    You have until then to rally the four tribes, to construct great works to hold back the waters, or else the land will descend once more into barbarism.</p>
-                
-                )}
-                &nbsp;
-                {props.turn!==10 && (
-                    <>
-                        {props.currentEvent ? 
+           
+                <Navbar className="bottomBar" expand="md" fixed="bottom">
+
+                        {(props.turn===10) && ( 
                         
-                        //Event message
-                        
-                        (
-                            <> {!props.eventOutcome && (
-
-                                <p>{SingularEventCode[props.currentEvent].text} <br />
-                                    <button type="button" onClick={()=>props.tallyEventOutcome(SingularEventCode[props.currentEvent].outcome1Payoffs, 1)}>{SingularEventCode[props.currentEvent].option1Text}</button>&nbsp;&nbsp;<button type="button"  onClick={()=>props.tallyEventOutcome(SingularEventCode[props.currentEvent].outcome2Payoffs, 2)}>{SingularEventCode[props.currentEvent].option2Text}</button>
-                                </p>
-                            )}
-
-                            {props.eventOutcome && (
-                                <div>
-                                    <p><b>{SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Title`]}</b></p>
-                                    <p>
-                                    {SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Text`]}
-                                    </p>
-                                    <p><button type="button" onClick={props.killEvent}>{
-                                    SingularEventCode[props.currentEvent][`endEventText${props.whichEventNumber}`]
-                                    }
-                                    </button></p>
-                                </div>
-
-                            )}
-                                
-                                
-                            
-                            </>
-                        ) : (
-                        <p>There are no current events.
-                        </p>
+                            <p>A village elder comes to you in the dead of night, recounting a vision of doom. 
+                            Within {props.endGameTurns} moons, they say, a great flood will inundate the land, erasing any and all trace of a once proud people.
+                            As some of the villagers make to stitch together rafts and flee, you begin an impassioned plea not to abandon all that you have accomplished thus far. 
+                            You have until then to rally the four tribes, to construct great works to hold back the waters, or else the land will descend once more into barbarism.</p>
                         
                         )}
-                    </>
-                )}
-                &nbsp;
-                {(props.settlers>0) && settlePrompt(props.settlers)}
-                &nbsp;
-                {props.selectedTerrain && terrainInfo(props.selectedTerrain, props.selectedTerrainX, props.selectedTerrainY, props.settle, props.settled, props.selectedIsSettled, props.turn, props.nextTurn, props.settlers)}
-                &nbsp;
-                {props.settled && ( <>
-                    <p>Food: {props.food}</p>
-                    <p>Production: {props.production}</p>
-                    <p>Commerce: {props.commerce}</p>
-                </>
-                )}
-                &nbsp;
-                {(props.turn>10) && (<p>Turns until the Flood: {props.endGameTurns-props.turn}</p>)}
-                &nbsp;
-                {props.settled && (<button type="button" onClick={props.nextTurn}>End Turn {props.turn}</button>)}
-            </Navbar>
+                        &nbsp;
+                        {props.turn!==10 && (
+                            <>
+                                {props.currentEvent ? 
+                                
+                                //Event message
+                                
+                                (
+                                    <> {!props.eventOutcome && (
+
+                                        <p>{SingularEventCode[props.currentEvent].text} <br />
+                                            <button type="button" onClick={()=>props.tallyEventOutcome(SingularEventCode[props.currentEvent].outcome1Payoffs, 1)}>{SingularEventCode[props.currentEvent].option1Text}</button>&nbsp;&nbsp;<button type="button"  onClick={()=>props.tallyEventOutcome(SingularEventCode[props.currentEvent].outcome2Payoffs, 2)}>{SingularEventCode[props.currentEvent].option2Text}</button>
+                                        </p>
+                                    )}
+
+                                    {props.eventOutcome && (
+                                        <div>
+                                            <p><b>{SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Title`]}</b></p>
+                                            <p>
+                                            {SingularEventCode[props.currentEvent][`outcome${props.whichEventNumber}Text`]}
+                                            </p>
+                                            <p><button type="button" onClick={props.killEvent}>{
+                                            SingularEventCode[props.currentEvent][`endEventText${props.whichEventNumber}`]
+                                            }
+                                            </button></p>
+                                        </div>
+
+                                    )}
+                                        
+                                        
+                                    
+                                    </>
+                                ) : (
+                                <p>There are no current events.
+                                </p>
+                                
+                                )}
+                            </>
+                        )}
+                        &nbsp;
+                        {(props.settlers>0) && settlePrompt(props.settlers)}
+                        &nbsp;
+                        {props.selectedTerrain && terrainInfo(props.selectedTerrain, props.selectedTerrainX, props.selectedTerrainY, props.settle, props.settled, props.selectedIsSettled, props.turn, props.nextTurn, props.settlers)}
+                        &nbsp;
+                        {props.settled && ( <>
+                            <p>Food: {props.food}</p>
+                            <p>Production: {props.production}</p>
+                            <p>Commerce: {props.commerce}</p>
+                        </>
+                        )}
+                        &nbsp;
+                        {(props.turn>10) && (<p>Turns until the Flood: {props.endGameTurns-props.turn}</p>)}
+                        &nbsp;
+                        {props.settled && (<button type="button" onClick={props.nextTurn}>End Turn {props.turn}</button>)}
+                    
+                </Navbar>
+            
         );
     } else return (
 
-        <Navbar bg="light" expand="md" fixed="bottom">
+        <Navbar bg="light" expand="md" fixed="bottom" style={bottomCSS}>
             {(props.endGame==="Victory") ?
              ( <>
                     <Navbar.Text>Your people have tamed the waters and held back the tide. History will remember you as the first. </Navbar.Text>

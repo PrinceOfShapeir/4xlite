@@ -1,0 +1,11 @@
+.bottomBar {
+  font-family: URW Chancery L, Brush Script MT, cursive;
+  background-color: rgb(237, 237, 95);
+  border-color: rgb(254, 255, 0);
+  border-style: double;
+  border-width: 0.5em;
+  border-image-slice: 1;
+}
+.bottomBar button {
+  background-color: rgb(229, 229, 131);
+}

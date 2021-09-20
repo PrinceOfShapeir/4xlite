@@ -15,7 +15,7 @@ function terrainSelect(x, y, size, probSeed) {
     let waterProb = waterProbability(x,y,size, probSeed);
 
     if (randomNumber <= waterProb) {
-        console.log("water probability was " + waterProb)
+        //console.log("water probability was " + waterProb)
         return "water";
     }
     else {
