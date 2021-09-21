@@ -9,3 +9,8 @@
 .bottomBar button {
   background-color: rgb(229, 229, 131);
 }
+.bottomBar .bottomAlert {
+  border-color: rgb(240, 240, 5);
+  border-style: double;
+  border-width: 0.5em;
+}

@@ -117,7 +117,7 @@ function bottomBar (props) {
 
                         {(props.turn===10) && ( 
                         
-                            <p>A village elder comes to you in the dead of night, recounting a vision of doom. 
+                            <p className="bottomAlert">A village elder comes to you in the dead of night, recounting a vision of doom. 
                             Within {props.endGameTurns} moons, they say, a great flood will inundate the land, erasing any and all trace of a once proud people.
                             As some of the villagers make to stitch together rafts and flee, you begin an impassioned plea not to abandon all that you have accomplished thus far. 
                             You have until then to rally the four tribes, to construct great works to hold back the waters, or else the land will descend once more into barbarism.</p>
@@ -125,7 +125,7 @@ function bottomBar (props) {
                         )}
                         &nbsp;
                         {props.turn!==10 && (
-                            <>
+                            <div className="bottomAlert">
                                 {props.currentEvent ? 
                                 
                                 //Event message
@@ -160,7 +160,7 @@ function bottomBar (props) {
                                 </p>
                                 
                                 )}
-                            </>
+                            </div>
                         )}
                         &nbsp;
                         {(props.settlers>0) && settlePrompt(props.settlers)}
